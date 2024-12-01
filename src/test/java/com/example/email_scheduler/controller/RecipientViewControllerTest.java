@@ -5,11 +5,9 @@ import com.example.email_scheduler.service.EmailService;
 import com.example.email_scheduler.service.RecipientService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.Model;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,14 +1,11 @@
 package com.example.email_scheduler.service;
 
-import com.example.email_scheduler.dao.RecipientDAO;
 import com.example.email_scheduler.model.dto.RecipientDTO;
 import com.example.email_scheduler.mapper.RecipientMapper;
 import com.example.email_scheduler.model.entity.RecipientEntity;
 import com.example.email_scheduler.dao.repository.RecipientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,6 +1,5 @@
 package com.example.email_scheduler.service;
 
-import com.example.email_scheduler.dao.RecipientDAO;
 import com.example.email_scheduler.model.dto.RecipientDTO;
 import com.example.email_scheduler.mapper.RecipientMapper;
 import com.example.email_scheduler.model.entity.RecipientEntity;

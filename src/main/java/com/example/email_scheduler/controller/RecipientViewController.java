@@ -1,19 +1,14 @@
 package com.example.email_scheduler.controller;
 
 import com.example.email_scheduler.model.dto.RecipientDTO;
-import com.example.email_scheduler.service.EmailService;
 import com.example.email_scheduler.service.RecipientService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Controller
-@Slf4j
 public class RecipientViewController {
 
     private final RecipientService recipientService;
