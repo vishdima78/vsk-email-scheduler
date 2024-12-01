@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ВСК Email-Scheduler</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fdfdfd;
+        }
+        h1 {
+            color: #2683fc;
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #2a85f6;
+            margin-top: 30px;
+        }
+        .table {
+            margin-top: 20px;
+            background-color: white;
+            display: none;
+        }
+        .table tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+        .btn-danger {
+            margin-left: 10px;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ВСК Email-Scheduler</h1>
+
+    <div class="alert alert-danger" th:if="${errorMessage}">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
+    <form class="mb-4" method="post" th:action="@{/recipients}">
+        <div class="form-group">
+            <label for="email">Добавить адресат:</label>
+            <input class="form-control" id="email" name="email" placeholder="Введите адрес электронной почты" required
+                   type="email"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    </form>
+
+    <h2>Существующие адресаты:</h2>
+    <table class="table" th:if="${recipients.size() > 0}">
+        <thead>
+        <tr>
+            <th>Адрес электронной почты</th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipientEntity : ${recipients}">
+            <td>
+                <span class="email-display" th:text="${recipientEntity.email}"></span>
+                <form class="edit-form" method="post" style="display:none;"
+                      th:action="@{/recipients/update/{id}(id=${recipientEntity.id})}">
+                    <input class="form-control" name="email" required th:value="${recipientEntity.email}" type="email"/>
+                    <button class="btn btn-success" type="submit">Сохранить</button>
+                </form>
+            </td>
+            <td class="text-center" th:text="${recipientEntity.id}"></td>
+            <td class="text-center">
+                <button class="btn btn-warning" onclick="toggleEdit(this)" type="button">Изменить</button>
+                <form method="post" style="display:inline;"
+                      th:action="@{/recipients/delete/{id}(id=${recipientEntity.id})}">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function toggleEdit(button) {
+        var row = button.closest('tr');
+        var editForm = row.querySelector('.edit-form');
+        var emailDisplay = row.querySelector('.email-display');
+
+        if (editForm.style.display === 'none' || editForm.style.display === '') {
+            emailDisplay.style.display = 'none';
+            editForm.style.display = 'block';
+        } else {
+            emailDisplay.style.display = 'inline';
+            editForm.style.display = 'none';
+        }
+    }
+
+    window.onload = function () {
+        document.querySelector('.table').style.display = 'table'; // Показать таблицу
+    }
+</script>
+</body>
+</html>
